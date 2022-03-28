@@ -1,0 +1,31 @@
+.container > header{
+    background-color: rgb(31, 31, 31);
+    height:80px;
+    padding-top: 20px;
+    padding-bottom:20px;
+    padding-left:25px;
+    padding-right:30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow:hidden;
+    transition:.5s ease-in-out;
+}
+.container > header > h1{
+    color: white;
+    width: max-content;
+    cursor: pointer;
+}
+.container > header > i{
+    color: white;
+    font-size:30px;
+    cursor: pointer;
+}
+
+.container > .containerAnimationOut{
+    padding-top: 0;
+    padding-bottom:0;
+    padding-left:0;
+    padding-right:0;
+    height:0;
+}

@@ -1,30 +1,33 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+    <div class="container">
+      <Header />
+      <Result />
+      <Table />
+      <Keyboard />
+      <WordDataSet />
+    </div>
 </template>
+<script>
+import Header from './components/Header.vue'
+import Result from './components/Result.vue'
+import Table from './components/Table.vue'
+import Keyboard from './components/Keyboard.vue'
+import WordDataSet from './components/wordDataSet.vue'
 
+
+export default {
+  components : {
+    Header,
+    Result,
+    Table,
+    Keyboard,
+    WordDataSet
+  },
+  created : function(){
+           console.log('something is happening')
+        }
+}
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
+  @import url('../public/css/app.css');
 </style>
