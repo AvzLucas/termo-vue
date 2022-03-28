@@ -8,7 +8,6 @@
         methods : {
              loadWordSet : function(){
                 this.$store.commit('loadWordSet', this.dataSet)
-                console.log('i am being called' )
             }
         },
         created : function(){

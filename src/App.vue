@@ -23,9 +23,6 @@ export default {
     Keyboard,
     WordDataSet
   },
-  created : function(){
-           console.log('something is happening')
-        }
 }
 </script>
 <style>

@@ -16,9 +16,6 @@ export default ({
       return this.$store.state.headerView
     }
   },
-  created : function(){
-           console.log('something is happening')
-        }
 })
 </script>
 <style scoped>
