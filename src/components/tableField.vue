@@ -18,7 +18,11 @@ export default {
     },
     methods : {
         focusField : function(e){
-            if(!e.target.value.length > 0){
+            if(e.key=='ArrowRight'){
+               if(!e.target.nextElementSibling) return
+               e.target.nextElementSibling.focus()
+            }else
+            if(!e.target.value.length > 0  || e.key == 'ArrowLeft'){
                 if(!e.target.previousElementSibling) return
                 e.target.previousElementSibling.focus()
             }else{
@@ -27,21 +31,30 @@ export default {
             }
         },
         checkWord : function(e){
-               if(this.word.length < 5){
-                   this.$emit('error', 'notEnoughChars')
-                   return
-               } 
-               this.stringifiedWord = this.word.toString()
-               
-               for(let i in this.$store.state.wordSet){
-                   if(this.stringifiedWord == this.$store.state.wordSet[i]) isWord = true
-               }
-               if(isWord){
-                   
-               }else{
-                   this.$emit('error', 'invalidWord')
-               }
-
+            console.log(e.target.disabled)
+            for(let i in this.word){
+                this.word[i].toUpperCase()
+            }
+            if(this.word.length < 5){
+                this.$emit('error', 'qtyLetters')
+                return
+            } 
+            this.stringifiedWord = this.word.join('')
+            for(let i in this.$store.state.wordSet){
+                if(this.stringifiedWord == this.$store.state.wordSet[i]) this.isWord = true
+            }
+            if(!this.isWord){
+                this.$emit('error', 'invalidWord')
+                return
+            }
+            this.validation()
+        },
+        validation : function(){
+            for(let i in word){
+                if(word[i] == this.$store.state.dailyWord[i]){
+                    
+                }
+            }
         }
     }
 }

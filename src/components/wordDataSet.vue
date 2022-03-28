@@ -8,7 +8,7 @@
         methods : {
              loadWordSet : function(){
                 this.$store.commit('loadWordSet', this.dataSet)
-            }
+            },
         },
         created : function(){
            this.loadWordSet()

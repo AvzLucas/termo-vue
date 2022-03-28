@@ -11,6 +11,8 @@ export default createStore({
   mutations: {
     loadWordSet(state, dataSet){
       state.wordSet = dataSet
+      let index = Math.round(Math.random() * 2193)
+      state.dailyWord = state.wordSet[index]
     },
     headerToggle(state){
       state.headerView = !state.headerView
