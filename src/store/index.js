@@ -4,7 +4,9 @@ export default createStore({
   state: {
     wordSet : null,
     headerView : true,
-    dailyWord : ''
+    dailyWord : '',
+    chances : 6,
+    chance : 1
   },
   getters: {
   },
@@ -16,6 +18,10 @@ export default createStore({
     },
     headerToggle(state){
       state.headerView = !state.headerView
+    },
+    oneLessChance(state){
+      state.chances = state.chances - state.chance
+      state.chance++ 
     }
   },
   actions: {

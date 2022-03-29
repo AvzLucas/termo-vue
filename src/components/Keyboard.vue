@@ -1,5 +1,7 @@
 <template>
-    <h1>aand this is gon be the meaningless keyboard</h1>
+    <div class="keyboardContainer">
+        
+    </div>
 </template>
 <script>
 export default {

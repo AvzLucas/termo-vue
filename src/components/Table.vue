@@ -10,7 +10,7 @@
                 <h2>Palavra inválida</h2>
             </div>
         </transition>
-        <TableField v-for="i in 6" :key="i" @error="error"/>
+        <TableField v-for="i in 6" :key="i" :rowIndex="i" :class="{disabled : this.$store.state.chance != i}" @error="error"/>
     </div>
 </template>
 <script>
@@ -19,7 +19,9 @@ export default {
     data(){
         return {
             qtyLetters : false,
-            invalidWord : false
+            invalidWord : false,
+            chance : this.$store.state.chance,
+            chances : this.$store.state.chances
         }
     },
     methods : {
@@ -49,5 +51,8 @@ export default {
     }
     .errorMsg-enter, .errorMsg-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+    }
+    .disabled{
+        pointer-events: none;
     }
 </style>
