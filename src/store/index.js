@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     wordSet : null,
-    headerView : true,
+    headerView : false,
     dailyWord : '',
     chances : 6,
     chance : 1
