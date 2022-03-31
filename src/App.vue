@@ -3,7 +3,6 @@
       <Header />
       <Result />
       <Table />
-      <Keyboard />
       <WordDataSet />
     </div>
 </template>
@@ -20,7 +19,6 @@ export default {
     Header,
     Result,
     Table,
-    Keyboard,
     WordDataSet
   },
 }

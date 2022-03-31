@@ -21,7 +21,8 @@ export default createStore({
     },
     oneLessChance(state){
       state.chances = state.chances - state.chance
-      state.chance++ 
+      state.chance++
+      console.log(state.chance)
     }
   },
   actions: {

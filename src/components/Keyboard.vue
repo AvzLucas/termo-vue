@@ -45,15 +45,13 @@ export default {
     },
     methods : {
         write : function(e){
-            let key = e.target.innerText
-            // console.log(key)
-            this.$store.commit('typeLetter', key)
+           this.emitter.emit('type', e.target.innerText)
         },
         confirm : function(){
-
+         this.emitter.emit('confirm')
         },
         del : function(){
-
+          this.emitter.emit('del')
         }
     }
 }
