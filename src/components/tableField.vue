@@ -1,15 +1,15 @@
 <template>
     <div class="container tableField">
         <input type="text" class="fieldInput" v-model="word[0]" maxlength="1" v-on:keyup="focusField" v-on:keypress.enter="checkWord"
-         :ref='"field0" + rowIndex' id="field0">
+         :ref='"field0" + rowIndex' id="field0"  style="text-transform:uppercase" @click="selectField(0)">
         <input type="text" class="fieldInput" v-model="word[1]" maxlength="1" v-on:keyup="focusField" v-on:keypress.enter="checkWord"
-         :ref='"field1" + rowIndex' id="field1" >
+         :ref='"field1" + rowIndex' id="field1" style="text-transform:uppercase" @click="selectField(1)" >
         <input type="text" class="fieldInput" v-model="word[2]" maxlength="1" v-on:keyup="focusField" v-on:keypress.enter="checkWord"
-         :ref='"field2" + rowIndex' id="field2" >
+         :ref='"field2" + rowIndex' id="field2"  style="text-transform:uppercase" @click="selectField(2)">
         <input type="text" class="fieldInput" v-model="word[3]" maxlength="1" v-on:keyup="focusField" v-on:keypress.enter="checkWord"
-         :ref='"field3" + rowIndex' id="field3">
+         :ref='"field3" + rowIndex' id="field3"  style="text-transform:uppercase" @click="selectField(3)"> 
         <input type="text" class="fieldInput" v-model="word[4]" maxlength="1" v-on:keyup="focusField" v-on:keypress.enter="checkWord"
-         :ref='"field4" + rowIndex' id="field4" >
+         :ref='"field4" + rowIndex' id="field4"  style="text-transform:uppercase" @click="selectField(4)">
     </div>
 </template>
 <script>
@@ -20,11 +20,32 @@ export default {
             word : ['','','','',''],
             stringifiedWord : '',
             isWord : false,
+            selectedField : null,
+            backSpace : 0,
+            chance : this.$store.state.chance
         }
     },
-    props: ['rowIndex'],
+    watch : {
+        '$store.state.chance':function(){
+            // console.log('mudou em')
+            if(this.$refs['field0'+this.$store.state.chance]){
+                console.log(this.$refs['field0'+this.$store.state.chance])
+                console.log('here i am')
+                this.$refs['field0'+this.$store.state.chance].focus()
+            } 
+        }
+    }
+    ,
+    props: ['rowIndex', 'wordIndex'],
     methods : {
+        selectField : function(p){
+            this.selectedField = p
+        },
         focusField : function(e){
+            if(e.key=='Enter') return
+            if(e.target.value && e.key.length == 1){
+                e.target.value = e.key
+            }
             if(e.key=='ArrowRight'){
                if(!e.target.nextElementSibling) return
                e.target.nextElementSibling.focus()
@@ -52,7 +73,6 @@ export default {
                     }
                 count++     
             }
-            console.log(count)
             if(!this.isWord){
                 this.$emit('error', 'invalidWord')
                 return
@@ -81,28 +101,41 @@ export default {
     },
     mounted(){
         this.emitter.on('type', data =>{
-            for(let i in this.word){
+            if(this.selectedField != null){
+                this.word[this.selectedField] = data
+                if(this.selectedField < 6){
+                    this.selectedField++
+                }
+            }else{
+                for(let i in this.word){
                 if(this.$refs['field'+i+this.$store.state.chance]  && !this.word[i]){
-                    this.word[i] = data
                     this.$refs['field'+i+this.$store.state.chance].focus()
+                    this.word[i] = data
                     break
                 }
-             }
+              }
+            }
         }),
         this.emitter.on('confirm', ()=>{
             if(this.$refs['field0'+ this.$store.state.chance] && this.word[0] != ''){
-                console.log(this.$refs['field0'+ this.$store.state.chance])
                 this.checkWord()
             }
         })
         this.emitter.on('del', ()=>{
-            if(this.$refs['field0'+this.$store.state.chance]){
+            if(this.selectedField != null){
+                this.word[this.selectedField] = ''
+                if(this.selectedField > 0){
+                    this.selectedField--
+                }
+            }else{
+                if(this.$refs['field0'+this.$store.state.chance]){
                 for(let i = 4; i >= 0 ;i-- ){
                     if(this.word[i]){
                         this.word[i] = ''
                         break
                     }
                 }
+            }
             }
         })
 
